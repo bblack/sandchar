@@ -1,6 +1,9 @@
 function p(d){
     return (d + d*d)/2;
 }
+function d(p){
+    return Math.floor(1/2*(Math.sqrt(8*p + 1) - 1));
+}
 angular.module('sandchar', [])
 .run(($rootScope, Character) => {
     Character.name = 'Fredward';
@@ -71,7 +74,8 @@ angular.module('sandchar', [])
         virtuesPower: () => _.inject(Character.virtues, (m, v) => m + v.power(), 0),
         totalPower: () => Character.virtuesPower() + Character.skillsPower() +
             Character.abilitiesPower(),
-        addAspect: () => Character.aspects.push('')
+        addAspect: () => Character.aspects.push(''),
+        level: () => d(Character.totalPower())
     })
     return Character;
 })
