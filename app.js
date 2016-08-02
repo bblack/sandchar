@@ -3,6 +3,11 @@ function p(d){
 }
 angular.module('sandchar', [])
 .run(($rootScope, Character) => {
+    Character.name = 'Fredward';
+    Character.aspects = [
+        'Sells shady things to shady people.',
+        'Mad scientist, easy on the science.'
+    ]
     $rootScope.char = Character;
 })
 .factory('Character', () => {
@@ -22,7 +27,6 @@ angular.module('sandchar', [])
         return p(this.rank);
     }
     var Character = {
-        name: 'Fredward',
         virtues: ['might', 'resilience', 'grace', 'wisdom', 'valor']
             .map((v) => new Virtue(v)),
         attributes: _.map({
@@ -44,8 +48,12 @@ angular.module('sandchar', [])
             'search', 'sense motive', 'sleight of hand', 'smell', 'spellcraft',
             'spot', 'survive', 'swim', 'tumble', 'wear armor', 'wield bow',
             'wield melee weapon', 'wield thrown weapon'], (s) => s),
-        virtuesPower: () => _.inject(Character.virtues, (m, v) => m + v.power(), 0),
-        totalPower: () => Character.virtuesPower() // + skills power + abilities power
+        aspects: []
     };
+    _.extend(Character, {
+        virtuesPower: () => _.inject(Character.virtues, (m, v) => m + v.power(), 0),
+        totalPower: () => Character.virtuesPower(), // + skills power + abilities power
+        addAspect: () => Character.aspects.push('')
+    })
     return Character;
 })

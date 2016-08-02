@@ -43,8 +43,7 @@ https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></
                             </td>
                         </tr>
                     </table>
-                <!-- </div>
-                <div class='col-sm-3'> -->
+
                     <h2>Attributes</h2>
                     <table class='table table-striped'>
                         <tr>
@@ -62,15 +61,36 @@ https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></
                         </tr>
                     </table>
                 </div>
-                <div class='col-sm-3'>
+                <div class='col-sm-6'>
                     <h2>Skills</h2>
                     <table class='table table-condensed table-striped'>
-                        <tr ng-repeat='skill in char.skills'>
-                            <td class='small'>
-                                {{skill}}
+                        <tr ng-repeat='skill in char.skills'
+                            ng-if='$even'>
+                            <td>{{skill}}</td>
+                            <td style='padding: 0;'>
+                                <input class='form-control' type='number'
+                                    style='width: 4em;'/>
+                            </td>
+                            <td>{{char.skills[$index + 1]}}</td>
+                            <td style='padding: 0;'>
+                                <input class='form-control' type='number'
+                                    style='width: 4em;'/>
                             </td>
                         </tr>
                     </table>
+                </div>
+                <div class='col-sm-3'>
+                    <h2>Special abilities</h2>
+                    <h2>Aspects</h2>
+                    <div class='form-group' ng-repeat='aspect in char.aspects'>
+                        <textarea ng-model='char.aspects[$index]'
+                        class='form-control'>
+                        </textarea>
+                    </div>
+                    <button type='button' class='btn btn-success'
+                        ng-click='char.addAspect()'>
+                        <span class='glyphicon glyphicon-plus'></span>
+                    </button>
                 </div>
             </div>
         </div>
