@@ -33,7 +33,14 @@ angular.module('sandchar', [])
             readiness: ['grace', 'wisdom'],
             charisma: ['grace', 'valor'],
             intelligence: ['wisdom', 'valor']
-        }, (v, k) => new Attribute({name: k, virtues: v}))
+        }, (v, k) => new Attribute({name: k, virtues: v})),
+        skills: _.map(['assess person', 'balance', 'block', 'bluff', 'climb',
+            'craft', 'deceive', 'disable device', 'dodge', 'gather information',
+            'handle animal', 'hide', 'intimidate', 'jump', 'know', 'listen',
+            'move silently', 'negotiate', 'perform', 'research', 'ride',
+            'search', 'sense motive', 'sleight of hand', 'smell', 'spellcraft',
+            'spot', 'survive', 'swim', 'tumble', 'wear armor', 'wield bow',
+            'wield melee weapon', 'wield thrown weapon'], (s) => s)
     };
     return Character;
 })
