@@ -11,6 +11,13 @@ angular.module('sandchar', [])
     $rootScope.char = Character;
 })
 .factory('Character', () => {
+    function Ability(name){
+        this.name = name;
+        this.rank = 0;
+    }
+    Ability.prototype.power = function(){
+        return p(this.rank);
+    }
     function Attribute(a){
         for (prop in a) this[prop] = a[prop];
     }
@@ -55,12 +62,15 @@ angular.module('sandchar', [])
             'search', 'sense motive', 'sleight of hand', 'smell', 'spellcraft',
             'spot', 'survive', 'swim', 'tumble', 'wear armor', 'wield bow',
             'wield melee weapon', 'wield thrown weapon'], (s) => new Skill(s)),
-        aspects: []
+        aspects: [],
+        abilities: _.times(3, () => new Ability())
     };
     _.extend(Character, {
+        abilitiesPower: () => _.inject(Character.abilities, (m, s) => m + s.power(), 0),
         skillsPower: () => _.inject(Character.skills, (m, s) => m + s.power(), 0),
         virtuesPower: () => _.inject(Character.virtues, (m, v) => m + v.power(), 0),
-        totalPower: () => Character.virtuesPower() + Character.skillsPower(), // + spec abilities power
+        totalPower: () => Character.virtuesPower() + Character.skillsPower() +
+            Character.abilitiesPower(),
         addAspect: () => Character.aspects.push('')
     })
     return Character;
