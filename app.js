@@ -22,37 +22,18 @@ angular.module('sandchar', [])
         name: 'Fredward',
         virtues: ['might', 'resilience', 'grace', 'wisdom', 'valor']
             .map((v) => new Virtue(v)),
-        attributes: [{
-            name: 'endurance',
-            virtues: ['might', 'resilience']
-        }, {
-            name: 'dexterity',
-            virtues: ['might', 'grace']
-        }, {
-            name: 'aptitude',
-            virtues: ['might', 'wisdom']
-        }, {
-            name: 'strength',
-            virtues: ['might', 'valor']
-        }, {
-            name: 'agility',
-            virtues: ['resilience', 'grace']
-        }, {
-            name: 'focus',
-            virtues: ['resilience', 'wisdom']
-        }, {
-            name: 'willpower',
-            virtues: ['resilience', 'valor']
-        }, {
-            name: 'readiness',
-            virtues: ['grace', 'wisdom']
-        }, {
-            name: 'charisma',
-            virtues: ['grace', 'valor']
-        }, {
-            name: 'intelligence',
-            virtues: ['wisdom', 'valor']
-        }].map((a) => new Attribute(a))
+        attributes: _.map({
+            endurance: ['might', 'resilience'],
+            dexterity: ['might', 'grace'],
+            aptitude: ['might', 'wisdom'],
+            strength: ['might', 'valor'],
+            agility: ['resilience', 'grace'],
+            focus: ['resilience', 'wisdom'],
+            willpower: ['resilience', 'valor'],
+            readiness: ['grace', 'wisdom'],
+            charisma: ['grace', 'valor'],
+            intelligence: ['wisdom', 'valor']
+        }, (v, k) => new Attribute({name: k, virtues: v}))
     };
     return Character;
 })
