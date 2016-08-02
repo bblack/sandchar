@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+        <script src='
+https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel='stylesheet' href='./bootstrap.min.css' />
+        <script src='./app.js'></script>
+    </head>
+    <style type='text/css'>
+        body {
+            margin: 1em;
+        }
+        .form-control {
+            background-color: black;
+            color: white;
+        }
+    </style>
+    <body ng-app='sandchar'>
+        <div class='container-fluid'>
+            <div class='row'>
+                <div class='col-sm-3' ng-controller='Virtues'>
+                    <h1>Virtues</h1>
+                    <table class='table table-striped'>
+                        <tr>
+                            <th></th>
+                            <th>rank</th>
+                            <th>power</th>
+                        </tr>
+                        <tr ng-repeat='virtue in char.virtues'>
+                            <td>{{virtue.name}}</td>
+                            <td style='padding: 0;'>
+                                <input class='form-control' type='number'
+                                    ng-model='virtue.rank'/>
+                            </td>
+                            <td>
+                                {{cost(virtue.rank)}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class='col-sm-3' ng-controller='Attributes'>
+                    <h1>Attributes</h1>
+                    <table class='table table-striped'>
+                        <tr>
+                            <th></th>
+                            <th>rank</th>
+                        </tr>
+                        <tr ng-repeat='att in ATTRIBUTES'>
+                            <td>{{att.name}}</td>
+                            <td class='bold'>{{calcAttribute(att.name)}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
