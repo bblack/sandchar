@@ -36,6 +36,7 @@ https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></
                             <td>{{virtue.name}}</td>
                             <td style='padding: 0;'>
                                 <input class='form-control' type='number'
+                                    style='width: 5em;'
                                     ng-model='virtue.rank'/>
                             </td>
                             <td>
@@ -78,7 +79,7 @@ https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></
                             <td style='padding: 0;'>
                                 <input class='form-control' type='number'
                                     ng-model='skill.rank'
-                                    style='width: 4em;'/>
+                                    style='width: 5em;'/>
                             </td>
                             <td>{{skill.power()}}</td>
                             <td>{{char.skills[$index + 1].name}}</td>
@@ -93,6 +94,7 @@ https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></
                 </div>
                 <div class='col-sm-3'>
                     <h2>Special abilities</h2>
+
                     <h2>Aspects</h2>
                     <div class='form-group'
                         ng-repeat='aspect in char.aspects track by $index'>
