@@ -28,7 +28,7 @@ https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></
                     <h2>Virtues</h2>
                     <table class='table table-striped'>
                         <tr>
-                            <th></th>
+                            <th>virtue</th>
                             <th>rank</th>
                             <th>power</th>
                         </tr>
@@ -47,7 +47,7 @@ https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></
                     <h2>Attributes</h2>
                     <table class='table table-striped'>
                         <tr>
-                            <th></th>
+                            <th>attribute</th>
                             <th>rank</th>
                         </tr>
                         <tr ng-repeat='att in char.attributes'>
@@ -64,25 +64,38 @@ https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></
                 <div class='col-sm-6'>
                     <h2>Skills</h2>
                     <table class='table table-condensed table-striped'>
+                        <tr>
+                            <th>skill</th>
+                            <th>rank</th>
+                            <th>power</th>
+                            <th>skill</th>
+                            <th>rank</th>
+                            <th>power</th>
+                        </tr>
                         <tr ng-repeat='skill in char.skills'
                             ng-if='$even'>
-                            <td>{{skill}}</td>
+                            <td>{{skill.name}}</td>
                             <td style='padding: 0;'>
                                 <input class='form-control' type='number'
+                                    ng-model='skill.rank'
                                     style='width: 4em;'/>
                             </td>
-                            <td>{{char.skills[$index + 1]}}</td>
+                            <td>{{skill.power()}}</td>
+                            <td>{{char.skills[$index + 1].name}}</td>
                             <td style='padding: 0;'>
                                 <input class='form-control' type='number'
+                                    ng-model='char.skills[$index + 1].rank'
                                     style='width: 4em;'/>
                             </td>
+                            <td>{{char.skills[$index + 1].power()}}</td>
                         </tr>
                     </table>
                 </div>
                 <div class='col-sm-3'>
                     <h2>Special abilities</h2>
                     <h2>Aspects</h2>
-                    <div class='form-group' ng-repeat='aspect in char.aspects'>
+                    <div class='form-group'
+                        ng-repeat='aspect in char.aspects track by $index'>
                         <textarea ng-model='char.aspects[$index]'
                         class='form-control'>
                         </textarea>

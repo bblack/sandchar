@@ -19,6 +19,13 @@ angular.module('sandchar', [])
         var v1 = _.find(Character.virtues, {name: this.virtues[1]});
         return Math.floor((v0.rank + v1.rank) / 3);
     };
+    function Skill(name){
+        this.name = name;
+        this.rank = 0;
+    }
+    Skill.prototype.power = function(){
+        return p(this.rank);
+    }
     function Virtue(name){
         this.name = name;
         this.rank = 0;
@@ -47,12 +54,13 @@ angular.module('sandchar', [])
             'move silently', 'negotiate', 'perform', 'research', 'ride',
             'search', 'sense motive', 'sleight of hand', 'smell', 'spellcraft',
             'spot', 'survive', 'swim', 'tumble', 'wear armor', 'wield bow',
-            'wield melee weapon', 'wield thrown weapon'], (s) => s),
+            'wield melee weapon', 'wield thrown weapon'], (s) => new Skill(s)),
         aspects: []
     };
     _.extend(Character, {
+        skillsPower: () => _.inject(Character.skills, (m, s) => m + s.power(), 0),
         virtuesPower: () => _.inject(Character.virtues, (m, v) => m + v.power(), 0),
-        totalPower: () => Character.virtuesPower(), // + skills power + abilities power
+        totalPower: () => Character.virtuesPower() + Character.skillsPower(), // + spec abilities power
         addAspect: () => Character.aspects.push('')
     })
     return Character;
