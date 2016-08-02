@@ -52,7 +52,12 @@ https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></
                             <th>rank</th>
                         </tr>
                         <tr ng-repeat='att in char.attributes'>
-                            <td>{{att.name}}</td>
+                            <td>
+                                {{att.name}}
+                                <span class='small text-muted'>
+                                    ({{att.virtues[0][0]}}+{{att.virtues[1][0]}})/3
+                                </span>
+                            </td>
                             <td class='bold'>{{att.rank()}}</td>
                         </tr>
                     </table>
