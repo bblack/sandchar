@@ -1,9 +1,6 @@
 angular.module('sandchar', [])
-.controller('Attributes', ($scope, Character) => {
-    $scope.char = Character;
-})
-.controller('Virtues', ($scope, Character) => {
-    $scope.char = Character;
+.run(($rootScope, Character) => {
+    $rootScope.char = Character;
 })
 .factory('Character', () => {
     function Attribute(a){
@@ -22,6 +19,7 @@ angular.module('sandchar', [])
         return (this.rank + this.rank*this.rank) / 2;
     }
     var Character = {
+        name: 'Fredward',
         virtues: ['might', 'resilience', 'grace', 'wisdom', 'valor']
             .map((v) => new Virtue(v)),
         attributes: [{
