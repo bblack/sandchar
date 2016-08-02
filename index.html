@@ -19,7 +19,10 @@ https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></
     </style>
     <body ng-app='sandchar'>
         <div class='container-fluid'>
-            <h1>{{char.name}}</h1>
+            <h1>
+                {{char.name}}
+                <span class='badge'>P: {{char.totalPower()}}</span>
+            </h1>
             <div class='row'>
                 <div class='col-sm-3'>
                     <h2>Virtues</h2>
@@ -36,7 +39,7 @@ https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></
                                     ng-model='virtue.rank'/>
                             </td>
                             <td>
-                                {{virtue.cost()}}
+                                {{virtue.power()}}
                             </td>
                         </tr>
                     </table>
