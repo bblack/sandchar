@@ -1,52 +1,60 @@
 angular.module('sandchar', [])
 .controller('Attributes', ($scope, Character) => {
-    $scope.ATTRIBUTES = [{
-        name: 'endurance',
-        virtues: ['might', 'resilience']
-    }, {
-        name: 'dexterity',
-        virtues: ['might', 'grace']
-    }, {
-        name: 'aptitude',
-        virtues: ['might', 'wisdom']
-    }, {
-        name: 'strength',
-        virtues: ['might', 'valor']
-    }, {
-        name: 'agility',
-        virtues: ['resilience', 'grace']
-    }, {
-        name: 'focus',
-        virtues: ['resilience', 'wisdom']
-    }, {
-        name: 'willpower',
-        virtues: ['resilience', 'valor']
-    }, {
-        name: 'readiness',
-        virtues: ['grace', 'wisdom']
-    }, {
-        name: 'charisma',
-        virtues: ['grace', 'valor']
-    }, {
-        name: 'intelligence',
-        virtues: ['wisdom', 'valor']
-    }];
-    $scope.calcAttribute = (attname) => {
-        var att = _.find($scope.ATTRIBUTES, {name: attname});
-        var v0 = _.find(Character.virtues, {name: att.virtues[0]});
-        var v1 = _.find(Character.virtues, {name: att.virtues[1]});
-        return Math.floor((v0.rank + v1.rank) / 3);
-    }
+    $scope.char = Character;
 })
 .controller('Virtues', ($scope, Character) => {
     $scope.char = Character;
-    $scope.cost = (rank) => 1/2*(rank + rank*rank);
 })
 .factory('Character', () => {
-    return {
-        virtues: ['might', 'resilience', 'grace', 'wisdom', 'valor'].map((v) => ({
-            name: v,
-            rank: 0
-        }))
+    function Attribute(a){
+        for (prop in a) this[prop] = a[prop];
+    }
+    Attribute.prototype.rank = function(){
+        var v0 = _.find(Character.virtues, {name: this.virtues[0]});
+        var v1 = _.find(Character.virtues, {name: this.virtues[1]});
+        return Math.floor((v0.rank + v1.rank) / 3);
     };
+    function Virtue(name){
+        this.name = name;
+        this.rank = 0;
+    }
+    Virtue.prototype.cost = function(){
+        return (this.rank + this.rank*this.rank) / 2;
+    }
+    var Character = {
+        virtues: ['might', 'resilience', 'grace', 'wisdom', 'valor']
+            .map((v) => new Virtue(v)),
+        attributes: [{
+            name: 'endurance',
+            virtues: ['might', 'resilience']
+        }, {
+            name: 'dexterity',
+            virtues: ['might', 'grace']
+        }, {
+            name: 'aptitude',
+            virtues: ['might', 'wisdom']
+        }, {
+            name: 'strength',
+            virtues: ['might', 'valor']
+        }, {
+            name: 'agility',
+            virtues: ['resilience', 'grace']
+        }, {
+            name: 'focus',
+            virtues: ['resilience', 'wisdom']
+        }, {
+            name: 'willpower',
+            virtues: ['resilience', 'valor']
+        }, {
+            name: 'readiness',
+            virtues: ['grace', 'wisdom']
+        }, {
+            name: 'charisma',
+            virtues: ['grace', 'valor']
+        }, {
+            name: 'intelligence',
+            virtues: ['wisdom', 'valor']
+        }].map((a) => new Attribute(a))
+    };
+    return Character;
 })

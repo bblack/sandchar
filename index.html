@@ -34,7 +34,7 @@ https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></
                                     ng-model='virtue.rank'/>
                             </td>
                             <td>
-                                {{cost(virtue.rank)}}
+                                {{virtue.cost()}}
                             </td>
                         </tr>
                     </table>
@@ -46,9 +46,9 @@ https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></
                             <th></th>
                             <th>rank</th>
                         </tr>
-                        <tr ng-repeat='att in ATTRIBUTES'>
+                        <tr ng-repeat='att in char.attributes'>
                             <td>{{att.name}}</td>
-                            <td class='bold'>{{calcAttribute(att.name)}}</td>
+                            <td class='bold'>{{att.rank()}}</td>
                         </tr>
                     </table>
                 </div>
