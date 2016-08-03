@@ -5,7 +5,8 @@
         <script src='
 https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel='stylesheet' href='./bootstrap.min.css' />
+        <link rel='stylesheet' href='./bootstrap.min.css' media='screen' />
+        <link rel='stylesheet' type='text/css' media='print' href='print.css' />
         <script src='./app.js'></script>
     </head>
     <style type='text/css'>
@@ -16,6 +17,9 @@ https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></
             background-color: black;
             color: white;
         }
+        table.table tr td.rank-input-cell {
+            padding: 0;
+        }
     </style>
     <body ng-app='sandchar'>
         <div class='container-fluid'>
@@ -24,17 +28,19 @@ https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></
                 <small>Level {{char.level()}}</small>
             </h1>
             <div class='row'>
-                <div class='col-md-3'>
+                <div id='virtues-and-attributes' class='col-md-3'>
                     <h2>Virtues</h2>
                     <table class='table table-striped'>
-                        <tr>
-                            <th>virtue</th>
-                            <th>rank</th>
-                            <th>power</th>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>virtue</th>
+                                <th>rank</th>
+                                <th>power</th>
+                            </tr>
+                        </thead>
                         <tr ng-repeat='virtue in char.virtues'>
                             <td>{{virtue.name}}</td>
-                            <td style='padding: 0;'>
+                            <td class='rank-input-cell' >
                                 <input class='form-control' type='number'
                                     style='width: 5em;'
                                     ng-model='virtue.rank'/>
@@ -47,10 +53,12 @@ https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></
 
                     <h2>Attributes</h2>
                     <table class='table table-striped'>
-                        <tr>
-                            <th>attribute</th>
-                            <th>rank</th>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>attribute</th>
+                                <th>rank</th>
+                            </tr>
+                        </thead>
                         <tr ng-repeat='att in char.attributes'>
                             <td>
                                 {{att.name}}
@@ -62,28 +70,30 @@ https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></
                         </tr>
                     </table>
                 </div>
-                <div class='col-md-6'>
+                <div id='skills' class='col-md-6'>
                     <h2>Skills</h2>
                     <table class='table table-striped'>
-                        <tr>
-                            <th>skill</th>
-                            <th>rank</th>
-                            <th>power</th>
-                            <th>skill</th>
-                            <th>rank</th>
-                            <th>power</th>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>skill</th>
+                                <th>rank</th>
+                                <th>power</th>
+                                <th>skill</th>
+                                <th>rank</th>
+                                <th>power</th>
+                            </tr>
+                        </thead>
                         <tr ng-repeat='skill in char.skills'
                             ng-if='$even'>
                             <td>{{skill.name}}</td>
-                            <td style='padding: 0;'>
+                            <td class='rank-input-cell'>
                                 <input class='form-control' type='number'
                                     ng-model='skill.rank'
                                     style='width: 5em;'/>
                             </td>
                             <td>{{skill.power()}}</td>
                             <td>{{char.skills[$index + 1].name}}</td>
-                            <td style='padding: 0;'>
+                            <td class='rank-input-cell'>
                                 <input class='form-control' type='number'
                                     ng-model='char.skills[$index + 1].rank'
                                     style='width: 5em;'/>
@@ -92,20 +102,22 @@ https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></
                         </tr>
                     </table>
                 </div>
-                <div class='col-md-3'>
+                <div id='abilities-and-aspects' class='col-md-3'>
                     <h2>Special abilities</h2>
                     <table class='table table-striped'>
-                        <tr>
-                            <th>ability</th>
-                            <th>rank</th>
-                            <th>power</th>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>ability</th>
+                                <th>rank</th>
+                                <th>power</th>
+                            </tr>
+                        </thead>
                         <tr ng-repeat='ability in char.abilities'>
-                            <td style='padding: 0;'>
+                            <td class='rank-input-cell'>
                                 <input class='form-control' type='text'
                                     ng-model='ability.name'>
                             </td>
-                            <td style='padding: 0;'>
+                            <td class='rank-input-cell'>
                                 <input class='form-control' type='number'
                                     style='width: 5em;'
                                     ng-model='ability.rank'>

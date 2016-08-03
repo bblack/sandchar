@@ -1,0 +1,29 @@
+table {
+    font-size: 8pt;
+}
+.form-control {
+    font-size: 8pt;
+    height: initial;
+    border-radius: 8px;
+    border-top: 0;
+    border-bottom: 0;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+table.table tr td {
+    padding: 4px;
+}
+#virtues-and-attributes {
+    width: 25%;
+    float: left;
+}
+#skills {
+    width: 50%;
+    float: left;
+}
+#abilities-and-aspects {
+    width: 25%;
+    float: left;
+}
