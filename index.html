@@ -5,7 +5,6 @@
         <script src='
 https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel='stylesheet' href='./bootstrap.min.css' media='screen' />
         <link rel='stylesheet' type='text/css' media='print' href='print.css' />
         <script src='./app.js'></script>
     </head>
@@ -13,20 +12,30 @@ https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></
         body {
             margin: 1em;
         }
-        .form-control {
-            background-color: black;
-            color: white;
+        .form-control.rank {
+            width: 5em;
         }
-        table.table tr td.rank-input-cell {
-            padding: 0;
+        table.table tr td.input-cell {
+            padding: 2px;
         }
     </style>
     <body ng-app='sandchar'>
         <div class='container-fluid'>
-            <h1>
-                {{char.name}}
-                <small>Level {{char.level()}}</small>
-            </h1>
+            <div class='row'>
+                <div class='col-xs-4'>
+                    <label>Name</label>
+                    <input class='form-control' ng-model='char.name' />
+                </div>
+                <div class='col-xs-2'>
+                    <label>Power</label>
+                    <input class='form-control'
+                        disabled value='{{char.totalPower()}}' />
+                </div>
+                <div class='col-xs-2'>
+                    <label>Level <small>d(P)</small></label>
+                    <input class='form-control' disabled value='{{char.level()}}' />
+                </div>
+            </div>
             <div class='row'>
                 <div id='virtues-and-attributes' class='col-md-3'>
                     <h2>Virtues</h2>
@@ -40,13 +49,13 @@ https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></
                         </thead>
                         <tr ng-repeat='virtue in char.virtues'>
                             <td>{{virtue.name}}</td>
-                            <td class='rank-input-cell' >
-                                <input class='form-control' type='number'
-                                    style='width: 5em;'
+                            <td class='input-cell' >
+                                <input class='form-control rank keyfill' type='number'
                                     ng-model='virtue.rank'/>
                             </td>
-                            <td>
-                                {{virtue.power()}}
+                            <td class='input-cell'>
+                                <input class='form-control rank' disabled
+                                    value='{{virtue.power()}}' />
                             </td>
                         </tr>
                     </table>
@@ -66,7 +75,10 @@ https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></
                                     ({{att.virtues[0][0]}}+{{att.virtues[1][0]}})/3
                                 </span>
                             </td>
-                            <td class='bold'>{{att.rank()}}</td>
+                            <td class='input-cell'>
+                                <input class='form-control rank'
+                                    disabled value='{{att.rank()}}'/>
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -86,19 +98,25 @@ https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></
                         <tr ng-repeat='skill in char.skills'
                             ng-if='$even'>
                             <td>{{skill.name}}</td>
-                            <td class='rank-input-cell'>
+                            <td class='input-cell'>
                                 <input class='form-control' type='number'
                                     ng-model='skill.rank'
                                     style='width: 5em;'/>
                             </td>
-                            <td>{{skill.power()}}</td>
+                            <td class='input-cell'>
+                                <input class='form-control rank' disabled
+                                    value='{{skill.power()}}'>
+                            </td>
                             <td>{{char.skills[$index + 1].name}}</td>
-                            <td class='rank-input-cell'>
+                            <td class='input-cell'>
                                 <input class='form-control' type='number'
                                     ng-model='char.skills[$index + 1].rank'
                                     style='width: 5em;'/>
                             </td>
-                            <td>{{char.skills[$index + 1].power()}}</td>
+                            <td class='input-cell'>
+                                <input class='form-control rank' disabled
+                                    value='{{char.skills[$index + 1].power()}}'>
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -113,17 +131,18 @@ https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></
                             </tr>
                         </thead>
                         <tr ng-repeat='ability in char.abilities'>
-                            <td class='rank-input-cell'>
+                            <td class='input-cell'>
                                 <input class='form-control' type='text'
                                     ng-model='ability.name'>
                             </td>
-                            <td class='rank-input-cell'>
+                            <td class='input-cell'>
                                 <input class='form-control' type='number'
                                     style='width: 5em;'
                                     ng-model='ability.rank'>
                             </td>
-                            <td>
-                                {{ability.power()}}
+                            <td class='input-cell'>
+                                <input class='form-control rank' disabled
+                                    value='{{ability.power()}}'>
                             </td>
                         </tr>
                     </table>

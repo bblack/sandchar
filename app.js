@@ -6,20 +6,17 @@ function d(p){
 }
 angular.module('sandchar', [])
 .run(($rootScope, Character) => {
-    Character.name = 'Fredward';
-    Character.aspects = [
-        'Sells shady things to shady people.',
-        'Mad scientist, easy on the science.'
-    ]
+    Character.name = null;
+    Character.aspects = ['', ''];
     $rootScope.char = Character;
 })
 .factory('Character', () => {
     function Ability(name){
         this.name = name;
-        this.rank = 0;
+        this.rank = null;
     }
     Ability.prototype.power = function(){
-        return p(this.rank);
+        return typeof this.rank === 'number' ? p(this.rank) : null;
     }
     function Attribute(a){
         for (prop in a) this[prop] = a[prop];
@@ -31,17 +28,17 @@ angular.module('sandchar', [])
     };
     function Skill(name){
         this.name = name;
-        this.rank = 0;
+        this.rank = null;
     }
     Skill.prototype.power = function(){
-        return p(this.rank);
+        return typeof this.rank === 'number' ? p(this.rank) : null;
     }
     function Virtue(name){
         this.name = name;
-        this.rank = 0;
+        this.rank = null;
     }
     Virtue.prototype.power = function(){
-        return p(this.rank);
+        return typeof this.rank === 'number' ? p(this.rank) : null;
     }
     var Character = {
         virtues: ['might', 'resilience', 'grace', 'wisdom', 'valor']
@@ -72,10 +69,16 @@ angular.module('sandchar', [])
         abilitiesPower: () => _.inject(Character.abilities, (m, s) => m + s.power(), 0),
         skillsPower: () => _.inject(Character.skills, (m, s) => m + s.power(), 0),
         virtuesPower: () => _.inject(Character.virtues, (m, v) => m + v.power(), 0),
-        totalPower: () => Character.virtuesPower() + Character.skillsPower() +
-            Character.abilitiesPower(),
+        totalPower: () => {
+            var p = Character.virtuesPower() + Character.skillsPower() +
+            Character.abilitiesPower();
+            return p != 0 ? p : null; // really more of a presentation detail
+        },
         addAspect: () => Character.aspects.push(''),
-        level: () => d(Character.totalPower())
+        level: () => {
+            var l = d(Character.totalPower());
+            return l != 0 ? l : null; // again, a presentation detail
+        }
     })
     return Character;
 })

@@ -1,6 +1,9 @@
 table {
     font-size: 8pt;
 }
+h2 {
+    font-size: 14pt;
+}
 .form-control {
     font-size: 8pt;
     height: initial;
@@ -11,6 +14,9 @@ table {
     border-left: 1px solid black;
     padding-top: 4px;
     padding-bottom: 4px;
+}
+table.table tr td.input-cell {
+    padding: 0 !important; /* needed since default is in style tag? */
 }
 table.table tr td {
     padding: 4px;
@@ -26,4 +32,7 @@ table.table tr td {
 #abilities-and-aspects {
     width: 25%;
     float: left;
+}
+#abilities-and-aspects textarea {
+    height: 10em;
 }
